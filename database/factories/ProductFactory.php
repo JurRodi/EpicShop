@@ -17,11 +17,11 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->firstname,
             'price' => $this->faker->numberBetween(20, 60),
             'description' => $this->faker->text,
             'category' => $this->faker->word,
-            'image' => $this->faker->imageUrl(),
+            'image' => $this->faker->imageUrl(640, 480, 'cats'),
         ];
     }
 }
