@@ -17,4 +17,13 @@ use App\Http\Controllers\ProductController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{product}', [ProductController::class, 'show']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/products/create', [ProductController::class, 'create']);
+    Route::post('/products/store', [ProductController::class, 'store']);
+    Route::get('/products/edit/{product}', [ProductController::class, 'edit']);
+    Route::put('/products/update/{product}', [ProductController::class, 'update']);
+    Route::delete('/products/delete/{id}', [ProductController::class, 'destroy']);
+});
