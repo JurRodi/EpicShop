@@ -132,7 +132,4 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products/index');
     }
-    {
-        //
-    }
 }
