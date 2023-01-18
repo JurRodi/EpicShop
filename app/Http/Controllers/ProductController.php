@@ -15,7 +15,10 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('products.index', ['products' => $products]);
+        $data = [
+            'products' => $products,
+        ];
+        return view('products/index', $data);
     }
 
     /**
@@ -25,7 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products/create');
     }
 
     /**
@@ -36,7 +39,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|string',
+            'description' => 'required|string',
+            'category' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $product = new Product();
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->category = $request->category;
+        if ($request->hasFile('image')) {
+            $url = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+            $product->image = $url;
+        }
+        $product->save();
+
+        $request->session()->flash('success', 'Product created successfully');
+        return redirect()->route('products/create');
     }
 
     /**
@@ -45,9 +68,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        $data = [
+            'product' => $product,
+        ];
+        return view('products/show', $data);
     }
 
     /**
@@ -56,9 +82,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        $data = [
+            'product' => $product,
+        ];
+        return view('products/edit', $data);
     }
 
     /**
@@ -68,9 +97,28 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|string',
+            'description' => 'required|string',
+            'category' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->category = $request->category;
+        if ($request->hasFile('image')) {
+            $url = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+            $product->image = $url;
+        }
+        $product->save();
+
+        $request->session()->flash('success', 'Product updated successfully');
+        return redirect()->route('products/edit', $product->id);
     }
 
     /**
@@ -79,7 +127,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return redirect()->route('products/index');
+    }
     {
         //
     }
