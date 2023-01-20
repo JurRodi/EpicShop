@@ -17,7 +17,6 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/products/{product}', [ProductController::class, 'show']);
-Route::get('/products/add-to-cart/{product}', [ProductController::class, 'addToCart']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/products/create', [ProductController::class, 'create']);
     Route::post('/products/store', [ProductController::class, 'store']);
@@ -25,6 +24,12 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/products/update/{product}', [ProductController::class, 'update']);
     Route::delete('/products/delete/{id}', [ProductController::class, 'destroy']);
 });
+
+Route::get('/cart', [CartController::class, 'index']);
+Route::post('/cart/add/{product}', [CartController::class, 'addToCart']);
+Route::post('/cart/order', [CartController::class, 'order']);
+
+Route::get('/orders', [OrderController::class, 'index']);
 
 Route::get('/login', [UserController::class, 'login']);
 Route::post('/login', [UserController::class, 'authenticate']);
