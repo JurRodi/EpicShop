@@ -15,7 +15,7 @@
                 <a class="nav-link info font-monospace" style="color: deepskyblue !important" aria-current="page" href="/">Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link font-monospace" style="color: deepskyblue !important" href="/admin">Admin</a>
+                <a class="nav-link font-monospace" style="color: deepskyblue !important" href="/login">Admin</a>
             </li>
         </ul>
     </nav>
