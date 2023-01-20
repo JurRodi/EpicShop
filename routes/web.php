@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/products/{product}', [ProductController::class, 'show']);
+Route::get('/products/add-to-cart/{product}', [ProductController::class, 'addToCart']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/products/create', [ProductController::class, 'create']);
     Route::post('/products/store', [ProductController::class, 'store']);
@@ -23,3 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/products/update/{product}', [ProductController::class, 'update']);
     Route::delete('/products/delete/{id}', [ProductController::class, 'destroy']);
 });
+
+Route::get('/login', [UserController::class, 'login']);
+Route::post('/login', [UserController::class, 'authenticate']);
+Route::get('/logout', [UserController::class, 'logout']);
