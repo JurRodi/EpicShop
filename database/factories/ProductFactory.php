@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->numberBetween(20, 60),
             'description' => $this->faker->text,
             'category' => $this->faker->word,
-            'image' => $this->faker->imageUrl(640, 480, 'cats'),
+            'image' => 'https://www.vermontteddybear.com/on/demandware.static/-/Sites-master-catalog-vtb/default/dw0c5c4cde/images/VTB/vtb-23846-18ohsosoftteddybear-lightbrown_feature4_20201012_0843.jpg',
         ];
     }
 }
