@@ -8,16 +8,24 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <small class="text-muted">{{ $price }}</small>
                 </div>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <a href="/products/edit/{{ $id }}" class="btn btn-sm btn-outline-secondary">Edit</a>
-                        <form action="/products/delete/{{ $id }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-outline-secondary">Delete</button>
-                        </form>
+                @if(Auth::check())
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="/products/edit/{{ $id }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <form action="/products/delete/{{ $id }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Delete</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                @else
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="/products/add-to-cart/{{ $id }}" class="btn btn-sm btn-outline-secondary">add to cart</a>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
