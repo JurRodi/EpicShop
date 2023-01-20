@@ -14,9 +14,21 @@
             <li class="nav-item">
                 <a class="nav-link info font-monospace" style="color: deepskyblue !important" aria-current="page" href="/">Products</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link font-monospace" style="color: deepskyblue !important" href="/login">Admin</a>
-            </li>
+            @if(Auth::check())
+                <li class="nav-item">
+                    <a class="nav-link info font-monospace" style="color: deepskyblue !important" aria-current="page" href="/orders">orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-monospace" style="color: deepskyblue !important" aria-current="page" href="/logout">Logout</a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link font-monospace" style="color: deepskyblue !important" aria-current="page" href="/cart">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-monospace" style="color: deepskyblue !important" href="/login">Admin</a>
+                </li>
+            @endif
         </ul>
     </nav>
 
