@@ -25,7 +25,7 @@
                     <label for="image" class="form-label">Image</label>
                     <input type="file" class="form-control" id="image" name="image">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-info">Submit</button>
             </form>
         </div>
     </div>
