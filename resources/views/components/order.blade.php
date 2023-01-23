@@ -13,23 +13,15 @@
                                 <th>Quantity</th>
                                 <th>Price</th>
                                 <th>Total</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($products as $product)
+                            @foreach (session('cart') as $product)
                                 <tr>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ $product->pivot->quantity }}</td>
-                                    <td>{{ $product->price }}</td>
-                                    <td>{{ $product->price * $product->pivot->quantity }}</td>
-                                    <td>
-                                        <form action="/products/remove-from-cart/{{ $product->id }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-secondary">Remove</button>
-                                        </form>
-                                    </td>
+                                    <td>{{ $product['name'] }}</td>
+                                    <td>{{ $product['quantity'] }}</td>
+                                    <td>{{ $product['price'] }}</td>
+                                    <td>{{ $product['quantity'] * $product['price'] }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
