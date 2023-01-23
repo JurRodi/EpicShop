@@ -1,12 +1,32 @@
 @extends('layouts/app')
 
 @section('content')
+    @if($errors->any())
+        @component('components/alert')
+            @slot('type')
+                danger
+            @endslot
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        @endcomponent
+    @endif
+
+    @if($flash = session('message'))
+        @component('components/alert')
+            @slot('type')
+                success
+            @endslot
+            {{ $flash }}
+            <a href="/products/{{ $product->id }}" class="">Back to product</a>
+        @endcomponent
+    @endif
     <div class="card container-sm mb-3 p-0 w-25" >
         <div class="card-img-top w-100 h-50 bg-light">
             <img src="{{ $product->image }}" alt="Product image" class="rounded img-fluid h-100 w-100">
         </div>
         <div class="card-body">
-            <form method="POST" action="/products/update/{{ $product }}" enctype="multipart/form-data">
+            <form method="POST" action="/products/update/{{ $product->id }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
@@ -24,6 +44,10 @@
                 <div class="mb-3">
                     <label for="image" class="form-label">Image</label>
                     <input type="file" class="form-control" id="image" name="image">
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="category" name="category" value="{{ $product->category }}">
                 </div>
                 <button type="submit" class="btn btn-info">Submit</button>
             </form>
