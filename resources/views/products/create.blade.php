@@ -15,7 +15,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Price</label>
-                    <input type="number" class="form-control" id="price" name="price" value="{{ $product->price }}">
+                    <input type="number" class="form-control" id="price" name="price" value="{{ old('price') }}">
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Image</label>
