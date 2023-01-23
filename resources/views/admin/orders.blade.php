@@ -3,7 +3,7 @@
 @section('content')
     @if ($orders->count() > 0)
         @foreach($orders as $order)
-            <div class="container">
+            <div class="container mb-3">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -21,12 +21,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($products as $product)
+                                        @foreach ($order->products as $product)
                                             <tr>
                                                 <td>{{ $product->name }}</td>
-                                                <td>{{ $product->name }}</td>
+                                                <td>{{ $product->quantity }}</td>
                                                 <td>{{ $product->price }}</td>
-                                                <td>{{ $product->price }}</td>
+                                                <td>{{ $product->quantity * $product->price }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
