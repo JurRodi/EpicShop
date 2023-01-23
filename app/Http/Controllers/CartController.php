@@ -18,7 +18,7 @@ class CartController extends Controller
         return view('users/shoppingCart', $data);
     }
 
-    public function addToCart($id)
+    public function addToCart(Request $request, $id)
     {
         $product = Product::find($id);
         if (!$product) {
@@ -35,12 +35,14 @@ class CartController extends Controller
                 ]
             ];
             session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
+            $request->session()->flash('message', 'Product added to cart successfully');
+            return redirect('/');
         }
         if (isset($cart[$id])) {
             $cart[$id]['quantity']++;
             session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
+            $request->session()->flash('message', 'Product added to cart successfully');
+            return redirect('/');
         }
         $cart[$id] = [
             "name" => $product->name,
@@ -49,7 +51,8 @@ class CartController extends Controller
             "image" => $product->image
         ];
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        $request->session()->flash('message', 'Product added to cart successfully');
+        return redirect('/');
     }
 
     public function order(Request $request)
@@ -66,12 +69,14 @@ class CartController extends Controller
         
         foreach ($products as $product) {
             $productOrder = new ProductOrder();
+            $productOrder->quantity = $cart[$product->id]['quantity'];
             $productOrder->order_id = $order->id;
             $productOrder->product_id = $product->id;
             $productOrder->save();
         }
 
         session()->forget('cart');
-        return redirect()->back()->with('success', 'Order placed successfully!');
+        $request->session()->flash('message', 'Order placed successfully');
+        return redirect('/cart');
     }
 }
