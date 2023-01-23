@@ -58,8 +58,8 @@ class ProductController extends Controller
         }
         $product->save();
 
-        $request->session()->flash('success', 'Product created successfully');
-        return redirect()->route('products/create');
+        $request->session()->flash('message', 'Product created successfully');
+        return redirect('products/create');
     }
 
     /**
@@ -104,7 +104,7 @@ class ProductController extends Controller
             'price' => 'required|string',
             'description' => 'required|string',
             'category' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $product->name = $request->name;
@@ -117,8 +117,8 @@ class ProductController extends Controller
         }
         $product->save();
 
-        $request->session()->flash('success', 'Product updated successfully');
-        return redirect()->route('products/edit', $product->id);
+        $request->session()->flash('message', 'Product updated successfully');
+        return redirect('products/edit/'.$product->id);
     }
 
     /**
@@ -127,9 +127,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
+        $product = Product::find($id);
         $product->delete();
-        return redirect()->route('products/index');
+        return redirect('/');
     }
 }
