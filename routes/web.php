@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,7 @@ Route::get('/cart', [CartController::class, 'index']);
 Route::post('/cart/add/{product}', [CartController::class, 'addToCart']);
 Route::post('/cart/order', [CartController::class, 'order']);
 
-Route::get('/orders', [OrderController::class, 'index']);
+Route::get('/orders', [OrderController::class, 'index'])->middleware('auth');
 
 Route::get('/login', [UserController::class, 'login']);
 Route::post('/login', [UserController::class, 'authenticate']);
