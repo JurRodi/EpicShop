@@ -25,7 +25,7 @@
                             <div class="btn-group">
                                 <form action="/cart/add/{{ $id }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-outline-secondary">Add to cart</button>
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary mx-1">Add to cart</button>
                                 </form>
                             </div>
                         </div>
