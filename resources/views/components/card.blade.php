@@ -23,7 +23,10 @@
                     @else
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="/products/add-to-cart/{{ $id }}" class="btn btn-sm btn-outline-secondary">add to cart</a>
+                                <form action="/cart/add/{{ $id }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary">Add to cart</button>
+                                </form>
                             </div>
                         </div>
                     @endif

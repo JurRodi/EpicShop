@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class CartController extends Controller
 {
@@ -15,7 +16,7 @@ class CartController extends Controller
         return view('users/shoppingCart', $data);
     }
 
-    public function addToCart()
+    public function addToCart($id)
     {
         $product = Product::find($id);
         if (!$product) {
