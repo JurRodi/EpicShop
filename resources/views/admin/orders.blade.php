@@ -3,11 +3,39 @@
 @section('content')
     @if ($orders->count() > 0)
         @foreach($orders as $order)
-            @component('components/order')
-                @slot('title')
-                    {{ 'Order'. $order->id }}
-                @endslot
-            @endcomponent
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Order {{$order->id}}</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($products as $product)
+                                            <tr>
+                                                <td>{{ $product->name }}</td>
+                                                <td>{{ $product->name }}</td>
+                                                <td>{{ $product->price }}</td>
+                                                <td>{{ $product->price }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endforeach
     @else
         <div class="container">
