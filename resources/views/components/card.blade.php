@@ -12,11 +12,11 @@
                     @if(Auth::check())
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="/products/edit/{{ $id }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <a href="/products/edit/{{ $id }}" class="btn btn-sm btn-outline-secondary rounded">Edit</a>
                                 <form action="/products/delete/{{ $id }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-outline-secondary">Delete</button>
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary mx-1">Delete</button>
                                 </form>
                             </div>
                         </div>
