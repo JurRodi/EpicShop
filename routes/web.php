@@ -33,6 +33,6 @@ Route::post('/cart/order', [CartController::class, 'order']);
 
 Route::get('/orders', [OrderController::class, 'index'])->middleware('auth');
 
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'authenticate']);
 Route::get('/logout', [UserController::class, 'logout']);

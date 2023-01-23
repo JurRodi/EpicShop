@@ -16,7 +16,7 @@ class CartController extends Controller
         return view('users/shoppingCart', $data);
     }
 
-    public function addToCart()
+    public function addToCart($id)
     {
         $product = Product::find($id);
         if (!$product) {
