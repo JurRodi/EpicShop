@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\ProductOrder;
 
 class CartController extends Controller
 {
@@ -50,7 +52,7 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
-    public function order()
+    public function order(Request $request)
     {
         $cart = session()->get('cart');
         $products = Product::find(array_keys($cart));
@@ -58,6 +60,18 @@ class CartController extends Controller
         foreach ($products as $product) {
             $total += $product->price * $cart[$product->id]['quantity'];
         }
-        return view('users/shoppingCart', $data);
+        $order = new Order();
+        $order->total = $total;
+        $order->save();
+        
+        foreach ($products as $product) {
+            $productOrder = new ProductOrder();
+            $productOrder->order_id = $order->id;
+            $productOrder->product_id = $product->id;
+            $productOrder->save();
+        }
+
+        session()->forget('cart');
+        return redirect()->back()->with('success', 'Order placed successfully!');
     }
 }
