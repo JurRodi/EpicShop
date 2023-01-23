@@ -21,6 +21,10 @@
                     <label for="image" class="form-label">Image</label>
                     <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}">
                 </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="category" name="category" value="{{ old('category') }}">
+                </div>
                 <button type="submit" class="btn btn-info">Submit</button>
             </form>
         </div>
