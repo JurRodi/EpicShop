@@ -35,7 +35,7 @@
         </ul>
     </nav>
 
-    @if(Auth::check())
+    @if(Auth::check() && Request::path() === '/')
         <a href="/products/create" class="btn btn-primary ms-5">Add new product</a>
     @endif
 
