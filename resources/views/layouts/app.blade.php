@@ -39,6 +39,15 @@
         <a href="/products/create" class="btn btn-primary ms-5">Add new product</a>
     @endif
 
+    @if($flash = session('message'))
+        @component('components/alert')
+            @slot('type')
+                success
+            @endslot
+            {{ $flash }}
+        @endcomponent
+    @endif
+
     <section class="m-5 d-flex flex-wrap">
         @yield('content')
     </section>

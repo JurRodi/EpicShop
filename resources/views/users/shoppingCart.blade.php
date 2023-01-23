@@ -12,12 +12,22 @@
                 <div class="col-md-12">
                     <form action="/cart/order" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-success mt-3">Buy</button>
+                        <button type="submit" class="btn btn-success">Buy</button>
                     </form>
                 </div>
             </div>
         </div>
     @else
+        @if($errors->any())
+            @component('components/alert')
+                @slot('type')
+                    danger
+                @endslot
+                @foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+                @endforeach
+            @endcomponent
+        @endif
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
