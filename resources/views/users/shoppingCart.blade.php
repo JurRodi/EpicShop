@@ -10,7 +10,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="/cart/order" class="btn btn-success mt-3">Buy</a>
+                    <form action="/cart/order" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-success mt-3">Buy</button>
+                    </form>
                 </div>
             </div>
         </div>
